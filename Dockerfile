@@ -1,12 +1,26 @@
 FROM deepchemio/deepchem:2.5.0
 # expose jupyter
 EXPOSE 8888/tcp
-# we can't `conda activate` inside of paperspace so we change the path 
-ENV PATH="/miniconda/envs/deepchem/bin:${PATH}"
+# we can't `conda activate` inside of paperspace so switch back to the base 
+# to then reinstall everything in that env
 
-RUN conda install -c conda-forge notebook && \
-    conda init bash && \
-    echo "conda activate" >> ~/.bashrc
-ADD ./docker ./
-CMD ./run.sh
-# CMD /bin/bash jupyter notebook --allow-root --ip=0.0.0.0 --no-browser --NotebookApp.trust_xheaders=True --NotebookApp.disable_check_xsrf=False --NotebookApp.allow_remote_access=True --NotebookApp.allow_origin='*'^C
+# RUN pip install tensorflow~=2.4
+RUN . /miniconda/etc/profile.d/conda.sh && \
+    conda activate deepchem && \
+    conda install -y -c conda-forge notebook
+# RUN conda install -y -c conda-forge rdkit
+# RUN conda install -y -c conda-forge deepchem=2.5 
+
+# RUN pip install tensorflow-gpu~=2.4 && \
+#     conda install -y -c conda-forge notebook && \
+#     conda install -y -c conda-forge deepchem && \
+#     conda install -y -c conda-forge rdkit
+
+# RUN conda init bash && \
+    # echo "conda activate" >> ~/.bashrc && \
+    # ~/.bashrc && \
+    # conda activate base && \
+    # conda install -y -c conda-forge deepchem rdkit notebook     
+ADD ./scripts ./scripts/
+ADD ./notebooks ./notebooks
+CMD ./scripts/run.sh
