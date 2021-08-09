@@ -1,5 +1,11 @@
 # Deepchem in Paperspace
 
+This repo includes a docker image meant to be used in paperspace when working with [deepchem](https://deepchem.io/), it may work in other cloud/jupyter environments but it hasn't been tested. The repo contains notebooks for each of the chapters so you can use it as a starting point if you're going through the book. For the official source code from the book, please refer to [deepchem/DeepLearningLifeSciences](https://github.com/deepchem/DeepLearningLifeSciences). 
+
+Is this needed? No, you may prefer to do this all locally or in your own cloud setup. You can follow the instructions on https://deepchem.io/ 
+Is this better? There are trade-offs to both approaches. A custom cloud or local setup may be more work for some. This helps you focus on developing or going through the book exercises without having to spend time setting up an environment. 
+Is this faster? Depending on your setup, this may be a lot faster since paperspace has free GPUs you can also pay for larger units. Doing everything on a standard laptop will get you 80% there when going through the book and won't be enough for any serious work. 
+
 ## Running in paperspace
 
 1. Create a [paperspace](https://console.paperspace.com/) account
